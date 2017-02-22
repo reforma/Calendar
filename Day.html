@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title></title>
+    <title>Calendar</title>
     <script src="https://unpkg.com/react@latest/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
@@ -11,30 +11,51 @@
     <div id="root"></div>
     <script type="text/babel">
 
-class Hello extends React.Component {
+
+class DayGrid extends React.Component{
   constructor(props){
     super(props);
-    this.state ={
-      month:'None',
-        }
-      }
-getMonth =()=>{
-  this.setState ({
-    month:'February',
-  });
-  console.log('Clicked')
-}
-  render() {
-    return (
-      <div>
-      <h1> Today: {this.state.month}</h1>
-      <button onClick={this.getMonth}>Click Me </button>
-      </div>
-    );
-  }
-};
-      ReactDOM.render(<Hello />,document.getElementById('root'));
+var date = new Date();
+var monthN = date.getMonth();
+var Months = ['Jan','Feb','March','April','May','June','July','August','September','October','November','December'];
+      this.state={
+      count:monthN,
+      month:Months[monthN]
+        };
 
-    </script>
+  }
+  handleClick =()=>{
+    var Months = ['Jan','Feb','March','April','May','June','July','August','September','October','November','December'];
+      this.setState({
+        count:this.state.count+1
+      });
+      if(this.state.count < 12){
+  this.setState({
+    month:Months[this.state.count],
+  });
+}else{
+  this.setState({
+    count:0
+  });
+}
+console.log(this.state.count);
+console.log(this.state.month);
+}
+
+
+render(){
+  return (
+    <div>
+      <h1>{this.state.month}</h1>
+      <h1>{this.state.count}</h1>
+      <button onClick={this.handleClick}>></button>
+      </div>
+  );
+}
+
+    }
+
+      ReactDOM.render(<DayGrid />,document.getElementById('root')    );
+      </script>
   </body>
 </html>
