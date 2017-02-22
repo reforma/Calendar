@@ -12,58 +12,36 @@
     <script type="text/babel">
 
 
-class DayGrid extends React.Component{
+class CurrentMonth extends React.Component{
   constructor(props){
     super(props);
-var date = new Date();
-var monthN = date.getMonth();
-var Months = ['Jan','Feb','March','April','May','June','July','August','September','October','November','December'];
-      this.state={
-      count:monthN,
-      month:Months[monthN]
-        };
-
   }
-  handleClick =()=>{
-    var Months = ['Jan','Feb','March','April','May','June','July','August','September','October','November','December'];
-    var specificM = Months[this.state.count % Months.length];
-    this.setState({
-      count:this.state.count+1,
-      month:specificM
-    });
-    console.log(specificM);
-}
-
-reduceClick =()=>{
-  var Months = ['Jan','Feb','March','April','May','June','July','August','September','October','November','December'];
-  var specificM = Months[this.state.count % Months.length];
-if(this.state.count < 0){
-  this.setState({
-    count:12,
-  });
-}else{
-  this.setState({
-    count:this.state.count-1,
-      month:specificM
-  });
-}
-}
-
-
-render(){
+  render(){
   return (
     <div>
-      <h1>{this.state.month}</h1>
-      <h1>{this.state.count}</h1>
-      <button onClick={this.handleClick}>Next</button>
-      <button onClick={this.reduceClick}>Prev</button>
-      </div>
+    <h2>{props.Month}</h2>
+    </div>
   );
-}
 
-    }
+};
 
-      ReactDOM.render(<DayGrid />,document.getElementById('root')    );
+class Monthselector extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render(){
+    var date = new Date();
+    var month = date.getMonth();
+    var Months = ['Jan','Feb','March','April','May','June','July','August','September','October','November','December'];
+    return(
+      <div>
+      <CurrentMonth Month={Date()} />
+      </div>
+    );
+  }
+};
+
+      ReactDOM.render(<CurrentMonth/>,document.getElementById('root'));
       </script>
   </body>
 </html>
