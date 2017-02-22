@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calendar</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+
+
+class Year extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      Year:2017
+    }
+  }
+    Yearup =()=>{
+      this.setState({
+        Year:this.state.Year+1,
+      });
+    }
+    Yeardown =()=>{
+      this.setState({
+        Year:this.state.Year-1,
+      });
+    }
+  render(){
+    return (
+      <div>
+      <h2>{this.state.Year}</h2>
+      <button onClick={this.Yearup}>Next</button>
+      <button onClick={this.Yeardown}>Prev</button>
+      </div>
+    );
+  }
+}
+
+const container =()=>{
+  return (
+    <div>
+    <Year Year={this.state.Year}/>
+    </div>
+  );
+};
+
+    ReactDOM.render(<Year />,document.getElementById('root'));
+    </script>
+</body>
+</html>

@@ -26,20 +26,27 @@ var Months = ['Jan','Feb','March','April','May','June','July','August','Septembe
   }
   handleClick =()=>{
     var Months = ['Jan','Feb','March','April','May','June','July','August','September','October','November','December'];
-      this.setState({
-        count:this.state.count+1
-      });
-      if(this.state.count < 12){
+    var specificM = Months[this.state.count % Months.length];
+    this.setState({
+      count:this.state.count+1,
+      month:specificM
+    });
+    console.log(specificM);
+}
+
+reduceClick =()=>{
+  var Months = ['Jan','Feb','March','April','May','June','July','August','September','October','November','December'];
+  var specificM = Months[this.state.count % Months.length];
+if(this.state.count < 0){
   this.setState({
-    month:Months[this.state.count],
+    count:12,
   });
 }else{
   this.setState({
-    count:0
+    count:this.state.count-1,
+      month:specificM
   });
 }
-console.log(this.state.count);
-console.log(this.state.month);
 }
 
 
@@ -48,7 +55,8 @@ render(){
     <div>
       <h1>{this.state.month}</h1>
       <h1>{this.state.count}</h1>
-      <button onClick={this.handleClick}>></button>
+      <button onClick={this.handleClick}>Next</button>
+      <button onClick={this.reduceClick}>Prev</button>
       </div>
   );
 }
