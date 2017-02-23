@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+
+
+class MonthSelector extends React.Component{
+  constructor(props){
+    super(props);
+    var date = new Date();
+    var currentMonth = date.getMonth()+1;
+      this.state={
+        monthN:currentMonth,
+      }
+    }
+      monthDown=()=>{
+        this.setState({
+          monthN:this.state.monthN -1,
+        });
+      }
+        monthUp=()=>{
+          this.setState({
+            monthN:this.state.monthN +1,
+          });
+        }
+    render(){
+        return(
+        <div>
+        <h2><Month monthN={this.state.monthN} /></h2>
+        <button onClick={this.monthDown}>Prev</button>
+        <button onClick={this.monthUp}>Next</button>
+        </div>
+  )}
+};
+
+class Month extends React.Component{
+  constructor(props){
+    super(props);
+  }
+render(){
+  if(this.props.monthN == 2){
+return(
+  <div>
+  <h2>February</h2>
+  </div>
+);
+}else{
+  return(
+  <div>
+  <h2>We have a Problem</h2>
+  <h2>{this.props.monthN}</h2>
+  </div>
+)
+}
+}
+}
+
+    ReactDOM.render(<Month />,document.getElementById('root'));
+
+ </script>
+</body>
+</html>

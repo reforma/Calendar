@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+
+    class MonthSelector extends React.Component{
+      constructor(props){
+        super(props);
+        var date = new Date();
+        var currentMonth = date.getMonth()+1;
+          this.state={
+            monthN:currentMonth,
+          }
+        }
+          monthDown=()=>{
+            this.setState({
+              monthN:this.state.monthN -1,
+            });
+          }
+            monthUp=()=>{
+              this.setState({
+                monthN:this.state.monthN +1,
+              });
+            }
+        render(){
+          if(this.state.monthN == 1){
+            return(
+            <div>
+    		<h2>January</h2>
+            <button onClick={this.monthDown}>Prev</button>
+            <button onClick={this.monthUp}>Next</button>
+            </div>
+      )
+      }
+      if(this.state.monthN == 2){
+      return(
+       <div>
+       <h2>February</h2>
+            <button onClick={this.monthDown}>Prev</button>
+            <button onClick={this.monthUp}>Next</button>
+            </div>
+    		)
+    		}
+        if(this.state.monthN == 3){
+        return(
+         <div>
+         <h2>March</h2>
+              <button onClick={this.monthDown}>Prev</button>
+              <button onClick={this.monthUp}>Next</button>
+              </div>
+      		)
+        }
+        if(this.state.monthN == 4){
+        return(
+         <div>
+         <h2>April</h2>
+              <button onClick={this.monthDown}>Prev</button>
+              <button onClick={this.monthUp}>Next</button>
+              </div>
+          )
+        }
+        if(this.state.monthN == 5){
+        return(
+         <div>
+         <h2>May</h2>
+              <button onClick={this.monthDown}>Prev</button>
+              <button onClick={this.monthUp}>Next</button>
+              </div>
+          )
+        }
+        if(this.state.monthN == 6){
+        return(
+         <div>
+         <h2>June</h2>
+              <button onClick={this.monthDown}>Prev</button>
+              <button onClick={this.monthUp}>Next</button>
+              </div>
+          )
+        }
+        if(this.state.monthN == 7){
+        return(
+         <div>
+         <h2>July</h2>
+              <button onClick={this.monthDown}>Prev</button>
+              <button onClick={this.monthUp}>Next</button>
+              </div>
+          )
+        }
+        if(this.state.monthN == 8){
+        return(
+         <div>
+         <h2>August</h2>
+              <button onClick={this.monthDown}>Prev</button>
+              <button onClick={this.monthUp}>Next</button>
+              </div>
+          )
+        }
+        if(this.state.monthN == 9){
+        return(
+         <div>
+         <h2>September</h2>
+              <button onClick={this.monthDown}>Prev</button>
+              <button onClick={this.monthUp}>Next</button>
+              </div>
+          )
+        }
+        if(this.state.monthN == 10){
+        return(
+         <div>
+         <h2>October</h2>
+              <button onClick={this.monthDown}>Prev</button>
+              <button onClick={this.monthUp}>Next</button>
+              </div>
+          )
+        }
+        if(this.state.monthN == 11){
+        return(
+         <div>
+         <h2>November</h2>
+              <button onClick={this.monthDown}>Prev</button>
+              <button onClick={this.monthUp}>Next</button>
+              </div>
+          )
+        }
+        if(this.state.monthN == 12){
+        return(
+         <div>
+         <h2>December</h2>
+              <button onClick={this.monthDown}>Prev</button>
+              <button onClick={this.monthUp}>Next</button>
+              </div>
+          )
+        };
+
+
+
+    }
+    }
+
+
+     ReactDOM.render(<MonthSelector />,document.getElementById('root'));
+
+  </script>
+</body>
+</html>
