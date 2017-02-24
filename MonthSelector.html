@@ -27,9 +27,8 @@
             });
           }
             monthUp=()=>{
-              this.setState({
-                monthN:this.state.monthN +1,
-              });
+              this.state.monthN == 12 ? this.setState({monthN:1}):this.setState({monthN:this.state.monthN + 1})
+
             }
         render(){
           if(this.state.monthN == 1){
