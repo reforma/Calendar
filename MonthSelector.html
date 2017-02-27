@@ -12,6 +12,29 @@
     <div id="root"></div>
     <script type="text/babel">
 
+    class App extends React.Component{
+      constructor(props){
+        super(props);
+      }
+      monthDown=()=>{
+        this.state.monthN == 1 ? this.setState({monthN:12,year:this.state.year - 1}):this.setState({monthN:this.state.monthN - 1})
+      }
+
+        monthUp=()=>{
+          this.state.monthN == 12 ? this.setState({monthN:1, year:this.state.year +1}):this.setState({monthN:this.state.monthN + 1})
+
+        }
+      //functions
+      render(){
+      // const monthN = this.state.monthN
+        return (
+        <div>
+        <MonthSelector onClick={this.monthDown}/>
+        <DayTable />
+        </div>
+      );
+      }
+    };
 
     class MonthSelector extends React.Component{
       constructor(props){
@@ -27,14 +50,7 @@
             NoOfDays : 0,
           }
         }
-          monthDown=()=>{
-            this.state.monthN == 1 ? this.setState({monthN:12,year:this.state.year - 1}):this.setState({monthN:this.state.monthN - 1})
-          }
 
-            monthUp=()=>{
-              this.state.monthN == 12 ? this.setState({monthN:1, year:this.state.year +1}):this.setState({monthN:this.state.monthN + 1})
-
-            }
         render(){
           if(this.state.monthN == 1){
             return(
@@ -264,23 +280,6 @@ class DayTable extends React.Component{
     );
   }
 };
-
-class App extends React.Component{
-  constructor(props){
-    super(props);
-  }
-  render(){
-    return (
-    <div>
-    <MonthSelector />
-    <DayTable />
-    </div>
-  );
-  }
-};
-
-
-
 
      ReactDOM.render(<App />,document.getElementById('root'));
 
