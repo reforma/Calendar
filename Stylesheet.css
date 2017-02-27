@@ -16,12 +16,14 @@ display: inline;
 .Middle{
   margin-left:auto;
   margin-right:auto;
-  width:50%;
+  width:30%;
 }
 
 .Middle table {
   margin: 0 auto;
   padding-top: 20px;
+  width:30%;
+
 }
 
 .inline > h2{

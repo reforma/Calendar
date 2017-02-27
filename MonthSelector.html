@@ -211,12 +211,28 @@ class DayTable extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-    arr:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+    week1:[1,2,3,4,5,6,7],
+    week2:[8,9,10,11,12,13,14],
+    week3:[15,16,17,18,19,20,21],
+    week4:[22,23,24,25,26,27,28],
+    week5:[29,30,31],
     NoOfDays:0,
     }
   }
   render(){
-    const items = this.state.arr.map((item,i)=>{
+    const Dweek1 = this.state.week1.map((item,i)=>{
+      return <td key={i}>{item}</td>
+    });
+    const Dweek2 = this.state.week2.map((item,i)=>{
+      return <td key={i}>{item}</td>
+    });
+    const Dweek3 = this.state.week3.map((item,i)=>{
+      return <td key={i}>{item}</td>
+    });
+    const Dweek4 = this.state.week4.map((item,i)=>{
+      return <td key={i}>{item}</td>
+    });
+    const Dweek5 = this.state.week5.map((item,i)=>{
       return <td key={i}>{item}</td>
     });
     return(
@@ -224,8 +240,20 @@ class DayTable extends React.Component{
       <table>
       <tbody>
         <tr>
-      {items}
-      </tr>
+        {Dweek1}
+        </tr>
+        <tr>
+        {Dweek2}
+        </tr>
+        <tr>
+        {Dweek3}
+        </tr>
+        <tr>
+        {Dweek4}
+        </tr>
+        <tr>
+        {Dweek5}
+        </tr>
       </tbody>
       </table>
       </div>
