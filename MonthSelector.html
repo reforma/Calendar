@@ -219,9 +219,13 @@ class DayTable extends React.Component{
     NoOfDays:0,
     }
   }
+    handleClick =()=>{
+      console.log(this.props.monthN);
+    }
+
   render(){
     const Dweek1 = this.state.week1.map((item,i)=>{
-      return <td key={i}>{item}</td>
+      return <td onClick={this.handleClick}key={i}>{item}</td>
     });
     const Dweek2 = this.state.week2.map((item,i)=>{
       return <td key={i}>{item}</td>
