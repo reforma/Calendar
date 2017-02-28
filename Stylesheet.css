@@ -19,10 +19,18 @@ display: inline;
   width:30%;
 }
 
-.Middle table {
-  margin: 0 auto;
-  padding-top: 20px;
-  width:30%;
+.Middle ul {
+  display:flex;
+  width:300px;
+  padding-left: 0px;
+}
+
+.Middle li{
+  list-style: none;
+  width:50px;
+  height:50px;
+  flex-wrap: wrap;
+  background-color: #8acaea
 
 }
 
