@@ -6,6 +6,7 @@
     <script src="https://unpkg.com/react@latest/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="Stylesheet" type="text/css" href=".\Stylesheet.css">
   </head>
   <body>
@@ -211,7 +212,8 @@ class DayTable extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-    week:[1,'','','','','','','','']//,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+      day:['M','T','W','T','F','S','S'],
+    week:['','','','','','',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,21,22,23,24,24,25,26,27,28,29,30,31,'',''],
     }
   }
     handleClick =()=>{
@@ -222,10 +224,14 @@ class DayTable extends React.Component{
     const Dweek = this.state.week.map((item,i)=>{
       return <li onClick={this.handleClick}key={i}>{item}</li>
     });
+    const Dday = this.state.day.map((item,i)=>{
+      return <li key={i}>{item}</li>
+    });
 
     return(
       <div className="Middle">
       <ul>
+      {Dday}
       {Dweek}
       </ul>
       </div>
