@@ -6,7 +6,6 @@
     <script src="https://unpkg.com/react@latest/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="Stylesheet" type="text/css" href=".\Stylesheet.css">
   </head>
   <body>
@@ -17,196 +16,88 @@
     class MonthSelector extends React.Component{
       constructor(props){
         super(props);
-        var date = new Date();
-        var currentMonth = date.getMonth()+1;
-        var currentYear = date.getFullYear();
-        var NoOfDays = 0;
+        let date = new Date();
+        let currentMonth = date.getMonth()+1;
+        let currentYear = date.getFullYear();
+        let lookupTable ={
+          1:function(){
+            return "January";
+          },
+          2:function(){
+            return "February";
+          },
+          3:function(){
+            return "March";
+          },
+          4:function(){
+            return "April";
+          },
+          5:function(){
+            return "May";
+          },
+          6:function(){
+            return "June";
+          },
+          7:function(){
+            return "July";
+          },
+          8:function(){
+            return "August";
+          },
+          9:function(){
+            return "September";
+          },
+          10:function(){
+            return "October";
+          },
+          11:function(){
+            return "November";
+          },
+          12:function(){
+            return "December";
+          }
+        }
 
           this.state={
             monthN:currentMonth,
             year:currentYear,
-            NoOfDays : 0,
+            Mname:lookupTable[currentMonth](),
+            lookupTable:lookupTable,
           }
         }
           monthDown=()=>{
-            this.state.monthN == 1 ? this.setState({monthN:12,year:this.state.year - 1}):this.setState({monthN:this.state.monthN - 1})
+            this.state.monthN == 1 ? this.setState(
+              { monthN:12,
+                year:this.state.year - 1,
+
+              }
+            ):this.setState(
+              {monthN:this.state.monthN - 1,
+
+              }
+            )
           }
 
             monthUp=()=>{
               this.state.monthN == 12 ? this.setState({monthN:1, year:this.state.year +1}):this.setState({monthN:this.state.monthN + 1})
-
             }
+
+
         render(){
-          if(this.state.monthN == 1){
-            return(
+          return(
             <div>
               <div className="container">
                 <h2>{this.state.year}</h2>
                   <div className="inline">
                     <button onClick={this.monthDown}>Prev</button>
-    		            <h2>January</h2>
+    		            <h2>{this.state.lookupTable[this.state.monthN]()}</h2>
                     <button onClick={this.monthUp}>Next</button>
                   </div>
                 </div>
             </div>
-      )
-      }
-      if(this.state.monthN == 2){
-      return(
-        <div>
-          <div className="container">
-            <h2>{this.state.year}</h2>
-              <div className="inline">
-                <button onClick={this.monthDown}>Prev</button>
-                <h2>February</h2>
-                <button onClick={this.monthUp}>Next</button>
-              </div>
-            </div>
-        </div>
-    		)
-    		}
-        if(this.state.monthN == 3){
-        return(
-          <div>
-            <div className="container">
-              <h2>{this.state.year}</h2>
-                <div className="inline">
-                  <button onClick={this.monthDown}>Prev</button>
-                  <h2>March</h2>
-                  <button onClick={this.monthUp}>Next</button>
-                </div>
-              </div>
-          </div>
-      		)
-        }
-        if(this.state.monthN == 4){
-        return(
-          <div>
-            <div className="container">
-              <h2>{this.state.year}</h2>
-                <div className="inline">
-                  <button onClick={this.monthDown}>Prev</button>
-                  <h2>April</h2>
-                  <button onClick={this.monthUp}>Next</button>
-                </div>
-              </div>
-          </div>
-          )
-        }
-        if(this.state.monthN == 5){
-        return(
-          <div>
-            <div className="container">
-              <h2>{this.state.year}</h2>
-                <div className="inline">
-                  <button onClick={this.monthDown}>Prev</button>
-                  <h2>May</h2>
-                  <button onClick={this.monthUp}>Next</button>
-                </div>
-              </div>
-          </div>
-          )
-        }
-        if(this.state.monthN == 6){
-        return(
-          <div>
-            <div className="container">
-              <h2>{this.state.year}</h2>
-                <div className="inline">
-                  <button onClick={this.monthDown}>Prev</button>
-                  <h2>June</h2>
-                  <button onClick={this.monthUp}>Next</button>
-                </div>
-              </div>
-          </div>
-          )
-        }
-        if(this.state.monthN == 7){
-        return(
-          <div>
-            <div className="container">
-              <h2>{this.state.year}</h2>
-                <div className="inline">
-                  <button onClick={this.monthDown}>Prev</button>
-                  <h2>July</h2>
-                  <button onClick={this.monthUp}>Next</button>
-                </div>
-              </div>
-          </div>
-          )
-        }
-        if(this.state.monthN == 8){
-        return(
-          <div>
-            <div className="container">
-              <h2>{this.state.year}</h2>
-                <div className="inline">
-                  <button onClick={this.monthDown}>Prev</button>
-                  <h2>August</h2>
-                  <button onClick={this.monthUp}>Next</button>
-                </div>
-              </div>
-          </div>
-          )
-        }
-        if(this.state.monthN == 9){
-        return(
-          <div>
-            <div className="container">
-              <h2>{this.state.year}</h2>
-                <div className="inline">
-                  <button onClick={this.monthDown}>Prev</button>
-                  <h2>September</h2>
-                  <button onClick={this.monthUp}>Next</button>
-                </div>
-              </div>
-          </div>
-          )
-        }
-        if(this.state.monthN == 10){
-        return(
-          <div>
-            <div className="container">
-              <h2>{this.state.year}</h2>
-                <div className="inline">
-                  <button onClick={this.monthDown}>Prev</button>
-                  <h2>October</h2>
-                  <button onClick={this.monthUp}>Next</button>
-                </div>
-              </div>
-          </div>
-          )
-        }
-        if(this.state.monthN == 11){
-        return(
-          <div>
-            <div className="container">
-              <h2>{this.state.year}</h2>
-                <div className="inline">
-                  <button onClick={this.monthDown}>Prev</button>
-                  <h2>November</h2>
-                  <button onClick={this.monthUp}>Next</button>
-                </div>
-              </div>
-          </div>
-          )
-        }
-        if(this.state.monthN == 12){
-        return(
-          <div>
-            <div className="container">
-              <h2>{this.state.year}</h2>
-                <div className="inline">
-                  <button onClick={this.monthDown}>Prev</button>
-                  <h2>December</h2>
-                  <button onClick={this.monthUp}>Next</button>
-                </div>
-              </div>
-          </div>
-          );
-      };
-    }
-  }
+      )};
+    };
+
 
 class DayTable extends React.Component{
   constructor(props){
