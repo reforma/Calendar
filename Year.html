@@ -13,43 +13,16 @@
 
 
 
-class Year extends React.Component{
-  constructor(props){
-    super(props);
-    this.state={
-      Year:2017
-    }
-  }
-    Yearup =()=>{
-      this.setState({
-        Year:this.state.Year+1,
-      });
-    }
-    Yeardown =()=>{
-      this.setState({
-        Year:this.state.Year-1,
-      });
-    }
-  render(){
+function Year(props){
     return (
       <div>
-      <h2>{this.state.Year}</h2>
-      <button onClick={this.Yearup}>Next</button>
-      <button onClick={this.Yeardown}>Prev</button>
+      <h2>{this.props.Year}</h2>
       </div>
     );
   }
-}
 
-const container =()=>{
-  return (
-    <div>
-    <Year Year={this.state.Year}/>
-    </div>
-  );
-};
 
-    ReactDOM.render(<Year />,document.getElementById('root'));
+    ReactDOM.render(<Year Year="2017"/>,document.getElementById('root'));
     </script>
 </body>
 </html>
