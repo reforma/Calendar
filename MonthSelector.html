@@ -12,29 +12,6 @@
     <div id="root"></div>
     <script type="text/babel">
 
-    class App extends React.Component{
-      constructor(props){
-        super(props);
-      }
-      monthDown=()=>{
-        this.state.monthN == 1 ? this.setState({monthN:12,year:this.state.year - 1}):this.setState({monthN:this.state.monthN - 1})
-      }
-
-        monthUp=()=>{
-          this.state.monthN == 12 ? this.setState({monthN:1, year:this.state.year +1}):this.setState({monthN:this.state.monthN + 1})
-
-        }
-      //functions
-      render(){
-      // const monthN = this.state.monthN
-        return (
-        <div>
-        <MonthSelector onClick={this.monthDown}/>
-        <DayTable />
-        </div>
-      );
-      }
-    };
 
     class MonthSelector extends React.Component{
       constructor(props){
@@ -88,7 +65,6 @@
             lookupTable:lookupTable,
           }
         }
-
           monthDown=()=>{
             this.state.monthN == 1 ? this.setState(
               { monthN:12,
@@ -107,7 +83,6 @@
             }
 
 
-
         render(){
           return(
             <div>
@@ -124,45 +99,17 @@
     };
 
 
-
-
 class DayTable extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       day:['M','T','W','T','F','S','S'],
     week:['','','','','','',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,21,22,23,24,24,25,26,27,28,29,30,31,'',''],
-
-    /* -- http://openweathermap.org
-{"city":{"id":1851632,"name":"Shuzenji",
-"coord":{"lon":138.933334,"lat":34.966671},
-"country":"JP",
-"cod":"200",
-"message":0.0045,
-"cnt":38,
-"list":[{
-        "dt":1406106000,
-        "main":{
-            "temp":298.77,
-            "temp_min":298.77,
-            "temp_max":298.774,
-            "pressure":1005.93,
-            "sea_level":1018.18,
-            "grnd_level":1005.93,
-            "humidity":87
-            "temp_kf":0.26},
-        "weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],
-        "clouds":{"all":88},
-        "wind":{"speed":5.71,"deg":229.501},
-        "sys":{"pod":"d"},
-        "dt_txt":"2014-07-23 09:00:00"}
-      ]}*/
     }
   }
     handleClick =()=>{
       console.log(this.props.monthN);
     }
-
 
   render(){
     const Dweek = this.state.week.map((item,i)=>{
@@ -183,7 +130,6 @@ class DayTable extends React.Component{
   }
 };
 
-
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -197,7 +143,6 @@ class App extends React.Component{
   );
   }
 };
-
 
      ReactDOM.render(<App />,document.getElementById('root'));
 
