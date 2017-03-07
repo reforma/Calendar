@@ -12,7 +12,6 @@
     <div id="root"></div>
     <script type="text/babel">
 
-
     class MonthSelector extends React.Component{
       constructor(props){
         super(props);
@@ -57,12 +56,13 @@
             return "December";
           }
         }
-
+let DaysOfWeek = [1,2,3,4,5,6,7,8,9]
           this.state={
             monthN:currentMonth,
             year:currentYear,
             Mname:lookupTable[currentMonth](),
             lookupTable:lookupTable,
+            week:Array(35).fill(...DaysOfWeek)
           }
         }
           monthDown=()=>{
@@ -108,7 +108,7 @@ class DayTable extends React.Component{
     }
   }
     handleClick =()=>{
-      console.log(this.props.monthN);
+      console.log(this.state.monthN);
     }
 
   render(){

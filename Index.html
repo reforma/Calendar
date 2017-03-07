@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="Stylesheet" type="text/css" href=".\Stylesheet.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+    class App extends React.Component{
+      constructor(props){
+        super(props);
+        this.state ={
+          grid: Array(35).fill(1),
+        };
+      }
+      renderBox(i){
+        return <Box value = {this.state.grid[i]}/>
+      }
+      render(){
+        return (
+          <div>
+          {this.renderBox(1)}
+          {this.renderBox(2)}
+          </div>
+        )
+      }
+    }
+
+    class Box extends React.Component{
+      render(){
+          return (
+          <button>Hello</button>
+
+        )
+      }
+    }
+
+    ReactDOM.render(<App />,document.getElementById('root'))
