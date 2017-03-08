@@ -97,7 +97,8 @@ class App extends React.Component{
         />
        <DayTable
        day = {this.state.day}
-       week = {this.state.week} />
+       week = {this.state.week}
+       monthN ={this.state.monthN} />
       </div>
     );
   }
@@ -129,7 +130,51 @@ class DayTable extends React.Component{
   super(props);
 }
 render(){
-            const Dweek = this.props.week.map((item,i)=>{
+  let arr =[];
+  let luTable = {
+    1:function(){
+      return 31;
+    },
+    2:function(){
+      return 28;
+    },
+    3:function(){
+      return 31;
+    },
+    4:function(){
+      return 30;
+    },
+    5:function(){
+      return 31
+    },
+    6:function(){
+      return 30
+    },
+    7:function(){
+      return 31
+    },
+    8:function(){
+      return 31
+    },
+    9:function(){
+      return 30
+    },
+    10:function(){
+      return 31
+    },
+    11:function(){
+      return 30
+    },
+    12:function(){
+      return 30
+    }
+  }
+
+  let limit = luTable[this.props.monthN]();
+  for (var i = 0; i <= limit; i++){
+    arr.push(i);
+  }
+            const Dweek = arr.map((item,i)=>{
               return <li key={i}>{item}</li>
             });
             const Dday = this.props.day.map((item,i)=>{
