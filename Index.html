@@ -16,17 +16,22 @@
       constructor(props){
         super(props);
         this.state ={
-          grid: Array(35).fill(1),
+          grid: [1,2,3],
         };
       }
       renderBox(i){
         return <Box value = {this.state.grid[i]}/>
       }
+      iteration(){
+        for(var i = 0; i< this.state.grid.length; i++){
+          return renderBox(i);
+      }
+    }
+
       render(){
         return (
           <div>
-          {this.renderBox(1)}
-          {this.renderBox(2)}
+          {this.iteration()}
           </div>
         )
       }
@@ -35,8 +40,9 @@
     class Box extends React.Component{
       render(){
           return (
-          <button>Hello</button>
-
+            <div>
+          <button>{this.props.value}</button>
+</div>
         )
       }
     }

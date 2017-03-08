@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="Stylesheet" type="text/css" href=".\Stylesheet.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+class App extends React.Component{
+  constructor(props){
+    super(props);
+    let date = new Date();
+    let currentMonth = date.getMonth()+1;
+    let currentYear =date.getFullYear();
+    let lookupTable ={
+      1:function(){
+        return "January";
+      },
+      2:function(){
+        return "February";
+      },
+      3:function(){
+        return "March";
+      },
+      4:function(){
+        return "April";
+      },
+      5:function(){
+        return "May";
+      },
+      6:function(){
+        return "June";
+      },
+      7:function(){
+        return "July";
+      },
+      8:function(){
+        return "August";
+      },
+      9:function(){
+        return "September";
+      },
+      10:function(){
+        return "October";
+      },
+      11:function(){
+        return "November";
+      },
+      12:function(){
+        return "December";
+      }
+    }
+    this.state ={
+      monthN:currentMonth,
+      year:currentYear,
+      Mname:lookupTable[currentMonth](),
+    }
+  }
+    onClick=()=>{
+      this.setState({
+        monthN:this.state.monthN +1,
+      });
+    }
+
+  render(){
+    return(
+      <div>
+      <h2>App Month = {this.state.monthN} App Year = {this.state.year} </h2>
+      <h2>Month Name = {this.state.Mname}</h2>
+      <Component
+       monthN ={this.state.monthN}
+       year = {this.state.year}
+       Mname = {this.state.Mname}
+       onClick={this.onClick} />
+      </div>
+    );
+  }
+};
+
+class Component extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render(){
+    return(
+      <div>
+      <h2>Component Month = {this.props.monthN} Component Year = {this.props.year} </h2>
+      <h2>Component Month Name = </h2>
+      <button onClick={this.props.onClick}>Click</button>
+      </div>
+    );
+  }
+};
+
+    ReactDOM.render(<App />,document.getElementById('root'))
