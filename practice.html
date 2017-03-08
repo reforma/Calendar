@@ -61,9 +61,11 @@ class App extends React.Component{
       year:currentYear,
       Mname:lookupTable[currentMonth](),
       lookupTable:lookupTable,
-    }
-  }
-  monthDown=()=>{
+      day:['M','T','W','T','F','S','S'],
+      week:['','',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,'',''],
+        }
+      }
+      monthDown=()=>{
     this.state.monthN == 1 ? this.setState(
       { monthN:12,
         year:this.state.year - 1,
@@ -91,8 +93,11 @@ class App extends React.Component{
        Mname = {this.state.Mname}
        lookupTable = {this.state.lookupTable}
        monthUp={this.monthUp}
-       monthDown={this.monthDown} />
-       <DayTable />
+       monthDown={this.monthDown}
+        />
+       <DayTable
+       day = {this.state.day}
+       week = {this.state.week} />
       </div>
     );
   }
@@ -122,17 +127,12 @@ class MonthSelector extends React.Component{
 class DayTable extends React.Component{
   constructor(props){
   super(props);
-    this.state = {
-      day:['M','T','W','T','F','S','S'],
-      week:['','',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,'',''],
-      }
-    }
-
-          render(){
-            const Dweek = this.state.week.map((item,i)=>{
+}
+render(){
+            const Dweek = this.props.week.map((item,i)=>{
               return <li key={i}>{item}</li>
             });
-            const Dday = this.state.day.map((item,i)=>{
+            const Dday = this.props.day.map((item,i)=>{
               return <li key={i}>{item}</li>
             });
 
