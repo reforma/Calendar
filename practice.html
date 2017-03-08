@@ -60,42 +60,92 @@ class App extends React.Component{
       monthN:currentMonth,
       year:currentYear,
       Mname:lookupTable[currentMonth](),
+      lookupTable:lookupTable,
     }
   }
-    onClick=()=>{
-      this.setState({
-        monthN:this.state.monthN +1,
-      });
+  monthDown=()=>{
+    this.state.monthN == 1 ? this.setState(
+      { monthN:12,
+        year:this.state.year - 1,
+
+      }
+    ):this.setState(
+      {monthN:this.state.monthN - 1,
+
+      }
+    )
+  }
+
+    monthUp=()=>{
+      this.state.monthN == 12 ? this.setState({monthN:1, year:this.state.year +1})
+      :this.setState({monthN:this.state.monthN + 1})
     }
+
 
   render(){
     return(
       <div>
-      <h2>App Month = {this.state.monthN} App Year = {this.state.year} </h2>
-      <h2>Month Name = {this.state.Mname}</h2>
-      <Component
+      <MonthSelector
        monthN ={this.state.monthN}
        year = {this.state.year}
        Mname = {this.state.Mname}
-       onClick={this.onClick} />
+       lookupTable = {this.state.lookupTable}
+       monthUp={this.monthUp}
+       monthDown={this.monthDown} />
+       <DayTable />
       </div>
     );
   }
 };
 
-class Component extends React.Component{
+class MonthSelector extends React.Component{
   constructor(props){
     super(props);
   }
   render(){
+    const MonthName = this.props.lookupTable[this.props.monthN]();
     return(
       <div>
-      <h2>Component Month = {this.props.monthN} Component Year = {this.props.year} </h2>
-      <h2>Component Month Name = </h2>
-      <button onClick={this.props.onClick}>Click</button>
-      </div>
-    );
-  }
-};
+        <div className="container">
+          <h2>{this.props.year}</h2>
+            <div className="inline">
+              <button onClick={this.props.monthDown}>Prev</button>
+              <h2>{MonthName}</h2>
+              <button onClick={this.props.monthUp}>Next</button>
+              </div>
+              </div>
+              </div>
+            );
+          }
+        };
+
+class DayTable extends React.Component{
+  constructor(props){
+  super(props);
+    this.state = {
+      day:['M','T','W','T','F','S','S'],
+      week:['','',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,'',''],
+      }
+    }
+
+          render(){
+            const Dweek = this.state.week.map((item,i)=>{
+              return <li key={i}>{item}</li>
+            });
+            const Dday = this.state.day.map((item,i)=>{
+              return <li key={i}>{item}</li>
+            });
+
+            return(
+              <div className="Middle">
+              <ul>
+              {Dday}
+              {Dweek}
+              </ul>
+              </div>
+            );
+          }
+        };
+
 
     ReactDOM.render(<App />,document.getElementById('root'))
