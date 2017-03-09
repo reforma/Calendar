@@ -111,17 +111,17 @@ class App extends React.Component{
         }
       }
       monthDown=()=>{
-    this.state.monthN == 1 ? this.setState(
-      { monthN:12,
-        year:this.state.year - 1,
+          let end = 7 - this.state.blanks;
 
+      this.state.monthN == 1 ? this.setState(
+        { monthN:12,
+          year:this.state.year - 1,
 
-      }
-    ):this.setState(
-      {monthN:this.state.monthN - 1,
-
-
-      }
+        }
+      ):this.setState(
+        {monthN:this.state.monthN - 1,
+  	   
+        }
     )
   }
 
@@ -198,7 +198,18 @@ render(){
       dayArr.push(i);
     }
 
-    let arr = [...blankArr, ...dayArr]
+     let ends = 42 - (blankArr.length + dayArr.length)
+if(ends >= 7){
+  ends = ends-7;
+}  else {
+  ends = ends;
+}
+    let endArr = [];
+    for(var i = 0; i < ends; i++){
+      endArr.push(i);
+    }
+    endArr.fill('');
+    let arr = [...blankArr, ...dayArr, ...endArr]
 
             const Dweek = arr.map((item,i)=>{
               return <li key={i}>{item}</li>
