@@ -95,7 +95,7 @@ class App extends React.Component{
         return 30
       },
       12:function(){
-        return 30
+        return 31
       }
     }
 
@@ -115,17 +115,25 @@ class App extends React.Component{
       { monthN:12,
         year:this.state.year - 1,
 
+
       }
     ):this.setState(
       {monthN:this.state.monthN - 1,
+
 
       }
     )
   }
 
     monthUp=()=>{
-      this.state.monthN == 12 ? this.setState({monthN:1, year:this.state.year +1})
-      :this.setState({monthN:this.state.monthN + 1})
+      let newBlank = (this.state.blanks + this.state.luTable[this.state.monthN]())%7;
+      console.log (newBlank);
+      this.state.monthN == 12 ? this.setState(
+        {monthN:1,
+         year:this.state.year +1,
+         blanks:newBlank})
+      :this.setState({monthN:this.state.monthN + 1,
+      blanks:newBlank})
     }
 
 
