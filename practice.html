@@ -19,6 +19,7 @@ class App extends React.Component{
     let currentMonth = date.getMonth()+1;
     let currentYear =date.getFullYear();
     let blanks = date.getDay() - (date.getDate() % 7);
+
     let lookupTable ={
       1:function(){
         return "January";
@@ -57,6 +58,16 @@ class App extends React.Component{
         return "December";
       }
     }
+
+    let luTable = 0;
+  if(this.state.monthN == 1 || 3 || 5 || 7 || 8 || 10 ){
+    luTable = 31
+  }else if(this.state.monthN == 4 || 6 || 9 || 11 || 12){
+    luTable = 30
+  }else{
+    luTable = 28
+    }
+
     this.state ={
       date:date,
       monthN:currentMonth,
@@ -65,6 +76,7 @@ class App extends React.Component{
       lookupTable:lookupTable,
       day:['M','T','W','T','F','S','S'],
       blanks:blanks,
+      luTable:luTable,
         }
       }
       monthDown=()=>{
@@ -101,7 +113,8 @@ class App extends React.Component{
        day = {this.state.day}
        monthN ={this.state.monthN}
        date ={this.state.date}
-       blanks={this.state.blanks}/>
+       blanks={this.state.blanks}
+       luTable={this.state.luTable}/>
       </div>
     );
   }
@@ -131,78 +144,22 @@ class MonthSelector extends React.Component{
 class DayTable extends React.Component{
   constructor(props){
   super(props);
-  let luTable = 0;
-if(this.props.monthN == 1 || 3 || 5 || 7 || 8 || 10 ){
-  luTable = 31
-}if(this.props.monthN == 4 || 6 || 9 || 11 || 12){
-  luTable = 30
-}else{
-  luTable = 28
 }
-  console.log(luTable);
-}
-    1:function(){
-      return 31;
-    },
-    2:function(){
-      return 28;
-    },
-    3:function(){
-      return 31;
-    },
-    4:function(){
-      return 30;
-    },
-    5:function(){
-      return 31
-    },
-    6:function(){
-      return 30
-    },
-    7:function(){
-      return 31
-    },
-    8:function(){
-      return 31
-    },
-    9:function(){
-      return 30
-    },
-    10:function(){
-      return 31
-    },
-    11:function(){
-      return 30
-    },
-    12:function(){
-      return 30
-    }
-  }
  // work out the number of blanks at the strt of the month
 
 render(){
-  let array =[];
-   let blankarray =[];
-  for (var i = 1; i <= this.props.blanks; i++){
-    blankarray.push(i);
-  }
-  blankarray.fill(''); // add the blanks to an array
 
-    let limit = this.state.luTable[this.props.monthN]();
-    for (var i = 1; i <= limit; i++){
-      array.push(i);
+  console.log(luTable);
+    let blankArr = [];
+    for(var i = 0; i < this.props.blanks; i++){
+      blankArr.push(i);
     }
-    let arr = [...blankarray, ...array]; // combines the two arrays
-
-
-  let endArray = []; //works out the number of spares at the end
-  let ends = 35 - arr.length
-  for (var x = 1; x <= ends; x++){
-    endArray.push(x);
-  }
-  endArray.fill('');
-  arr = [...arr,...endArray]; // finalizes the arr for interating
-
+    blankArr.fill('');
+    let dayArr = [];
+    for(var i = 1; i <= luTable; i++){
+      dayArr.push(i);
+    }
+    let arr = [...blankArr, ...dayArr]
 
             const Dweek = arr.map((item,i)=>{
               return <li key={i}>{item}</li>
