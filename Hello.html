@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+
+class Test extends React.Component{
+  constructor(props){
+    super(props);
+}
+
+  render(){
+    const message = this.props.message;
+    return (
+      <div>
+      <h2>{this.props.message}</h2>
+      <button onClick={this.handleClick}>Click Me</button>
+      </div>
+    );
+  }
+};
+
+class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      message:'Hello',
+    }
+  }
+
+handleClick =()=>{
+  this.setState({
+    message:'Goodbye'
+  });
+}
+render(){
+  return (
+    <div>
+    <Test onClick={this.handleClick}/>
+    </div>
+  );
+}
+};
+
+
+  ReactDOM.render(<App />,document.getElementById('root'));
+
+</script>
+</body>
+</html>
