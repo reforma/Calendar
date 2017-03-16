@@ -18,7 +18,15 @@ class App extends React.Component{
     let date = new Date();
     let currentMonth = date.getMonth()+1;
     let currentYear =date.getFullYear();
-    let blanks = date.getDay() - (date.getDate() % 7);
+
+    let num =date.getDate() % 7;
+    let blanks;
+    if(date.getDate()-num >= 0){
+      blanks = date.getDay() - num;
+    }else{
+      blanks = date.getDay() - num -(-7);
+    }
+    console.log(blanks);
 
     let lookupTable ={
       1:function(){
