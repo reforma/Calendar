@@ -120,7 +120,11 @@ class App extends React.Component{
       }
       monthDown=()=>{
         let  endBlanks = 7 -this.state.blanks
-          let CmonthN = this.state.monthN -1;
+          let CmonthN
+          if (this.state.monthN == 1){
+            CmonthN = 12
+          }else{
+            CmonthN = this.state.monthN -1 }
 
           let blanks  = 0
            if((42 - this.state.luTable[CmonthN]() - endBlanks)>6){
