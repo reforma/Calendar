@@ -119,15 +119,26 @@ class App extends React.Component{
         }
       }
       monthDown=()=>{
-          let end = 7 - this.state.blanks;
+        let  endBlanks = 7 -this.state.blanks
+          let CmonthN = this.state.monthN -1;
 
-      this.state.monthN == 1 ? this.setState(
+          let blanks  = 0
+           if((42 - this.state.luTable[CmonthN]() - endBlanks)>6){
+            blanks =  35 - this.state.luTable[CmonthN]() - endBlanks
+          }else{
+            blanks = 42 - this.state.luTable[CmonthN]() - endBlanks
+          }
+
+        this.state.monthN == 1 ? this.setState(
         { monthN:12,
           year:this.state.year - 1,
+          blanks: blanks
+
 
         }
       ):this.setState(
         {monthN:this.state.monthN - 1,
+          blanks: blanks
 
         }
     )
