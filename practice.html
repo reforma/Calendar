@@ -144,14 +144,12 @@ class App extends React.Component{
           }else{
             blanks = 42 - this.state.luTable[CmonthN]() - endBlanks
           }
-console.log(leapYear)
-console.log(CmonthN)
-          if(leapYear == 1 && this.state.CmonthN == 2){
-            blanks = blanks - 1 }
-            else{
-              blanks = blanks
-            }
 
+if (leapYear == 1 && CmonthN == 2 ){
+  blanks = blanks -1
+}else {
+  blanks = blanks
+}
 
         this.state.monthN == 1 ? this.setState(
         { monthN:12,
