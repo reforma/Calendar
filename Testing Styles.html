@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="Stylesheet" type="text/css" href=".\Stylesheet.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+
+    class Test extends React.Component{
+      constructor(props){
+        super(props);
+      }
+      render(){
+        const style = {backgroundColor:'red'}
+        return (
+          <div>
+          <div style={style}>Hello</div>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Test/>,document.getElementById('root'))

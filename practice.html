@@ -15,19 +15,17 @@
 class App extends React.Component{
   constructor(props){
     super(props);
-    let date = new Date();
-    let currentMonth = date.getMonth()+1;
-    let currentYear =date.getFullYear();
-
-    let num =date.getDate() % 7;
-    let blanks;
-    if(date.getDate()-num >= 0){
-      blanks = date.getDay() - num;
-    }else{
-      blanks = date.getDay() - num -(-7);
-    }
-    console.log(blanks);
-
+      let date = new Date();
+      let currentMonth = date.getMonth()+1;
+      let currentYear =date.getFullYear();
+      let num =date.getDate() % 7;
+      let blanks;
+        if(date.getDay()-num >= 0){
+            blanks = date.getDay() - num;
+          }else{
+            blanks = date.getDay() - num -(-7);
+          }
+console.log(blanks)
     let lookupTable ={
       1:function(){
         return "January";
@@ -118,72 +116,69 @@ class App extends React.Component{
       luTable:luTable,
         }
       }
-      monthDown=()=>{
+        monthDown=()=>{
 
-        let leapYear
-        if(this.state.year % 4 !=0){
-          leapYear = 0;
-        }else if (this.state.year % 100 !=0) {
-          leapYear = 1;}
-          else if (this.state.year % 400 !=0) {
-            leapYear = 0;}
+          let leapYear
+            if(this.state.year % 4 !=0){
+              leapYear = 0;
+            }else if (this.state.year % 100 !=0) {
+              leapYear = 1;}
+            else if (this.state.year % 400 !=0) {
+              leapYear = 0;}
             else {
               leapYear = 1;
             }
 
         let  endBlanks = 7 -this.state.blanks
           let CmonthN
-          if (this.state.monthN == 1){
-            CmonthN = 12
-          }else{
-            CmonthN = this.state.monthN -1 }
+            if (this.state.monthN == 1){
+              CmonthN = 12
+            }else{
+              CmonthN = this.state.monthN -1 }
 
           let blanks
-           if((42 - this.state.luTable[CmonthN]() - endBlanks)>6){
-            blanks =  35 - this.state.luTable[CmonthN]() - endBlanks
-          }else{
-            blanks = 42 - this.state.luTable[CmonthN]() - endBlanks
+            if((42 - this.state.luTable[CmonthN]() - endBlanks)>6){
+              blanks =  35 - this.state.luTable[CmonthN]() - endBlanks
+            }else{
+              blanks = 42 - this.state.luTable[CmonthN]() - endBlanks
+            }
+
+          if (leapYear == 1 && CmonthN == 2 ){
+            blanks = blanks -1
+          }else {
+            blanks = blanks
           }
 
-if (leapYear == 1 && CmonthN == 2 ){
-  blanks = blanks -1
-}else {
-  blanks = blanks
-}
-
-        this.state.monthN == 1 ? this.setState(
-        { monthN:12,
+        this.state.monthN == 1 ? this.setState({
+          monthN:12,
           year:this.state.year - 1,
           blanks: blanks
-
-
-        }
-      ):this.setState(
-        {monthN:this.state.monthN - 1,
-          blanks: blanks
-
-        }
-    )
-  }
+          }
+            ):this.setState(
+              {monthN:this.state.monthN - 1,
+                blanks: blanks
+              }
+            )
+          }
 
     monthUp=()=>{
-
       let leapYear
-      if(this.state.year % 4 !=0){
-        leapYear = 0;
-      }else if (this.state.year % 100 !=0) {
-        leapYear = 1;}
+        if(this.state.year % 4 !=0){
+          leapYear = 0;
+        }else if (this.state.year % 100 !=0) {
+          leapYear = 1;}
         else if (this.state.year % 400 !=0) {
           leapYear = 0;}
-          else {
+        else {
             leapYear = 1;
           }
+
       let newBlank = 0;
-     if (leapYear == 1 && this.state.monthN == 2){
-        newBlank = (this.state.blanks + this.state.luTable[this.state.monthN]())%7 +1
-      } else {
-        newBlank = (this.state.blanks + this.state.luTable[this.state.monthN]())%7;
-      }
+        if (leapYear == 1 && this.state.monthN == 2){
+          newBlank = (this.state.blanks + this.state.luTable[this.state.monthN]())%7 +1
+        } else {
+          newBlank = (this.state.blanks + this.state.luTable[this.state.monthN]())%7;
+        }
 
       this.state.monthN == 12 ? this.setState(
         {monthN:1,
@@ -211,7 +206,9 @@ if (leapYear == 1 && CmonthN == 2 ){
        date ={this.state.date}
        blanks={this.state.blanks}
        luTable={this.state.luTable}
-       year = {this.state.year}/>
+       year = {this.state.year}
+       date={this.state.date}
+       currentMonth = {this.state.currentMonth}/>
       </div>
     );
   }
@@ -245,7 +242,14 @@ class DayTable extends React.Component{
  // work out the number of blanks at the strt of the month
 
 render(){
+  let style
 
+  if(this.props.year == this.props.date.getFullYear() && this.props.date.getMonth()+1 == this.props.monthN) {
+    style = {
+      backgroundColor:'red',
+    }
+  }
+console.log(style)
   let leapYear
   if(this.props.year % 4 !=0){
     leapYear = 0;
@@ -283,10 +287,10 @@ if(ends >= 7){
     let arr = [...blankArr, ...dayArr, ...endArr]
 
             const Dweek = arr.map((item,i)=>{
-              return <li key={i}>{item}</li>
+              return <li style={style} key={i}>{item}</li>
             });
             const Dday = this.props.day.map((item,i)=>{
-              return <li key={i}>{item}</li>
+              return <li  key={i}>{item}</li>
             });
 
             return(
