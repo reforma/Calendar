@@ -243,15 +243,8 @@ class DayTable extends React.Component{
  // work out the number of blanks at the strt of the month
 
 render(){
-  let today = this.props.date.getDate() + this.props.blanks
-  console.log(today);
-  let style
+  let today = this.props.date.getDate() + this.props.blanks -1;
 
-  if(this.props.year == this.props.date.getFullYear() && this.props.date.getMonth()+1 == this.props.monthN) {
-    style = {
-      backgroundColor:'red',
-  }
-console.log(style)
   let leapYear
   if(this.props.year % 4 !=0){
     leapYear = 0;
@@ -289,18 +282,13 @@ if(ends >= 7){
     let arr = [...blankArr, ...dayArr, ...endArr]
 
             const Dweek = arr.map((item,i)=>{
-              return(
-                <div>
-              <style>
-              {`
-              li:nth-child(1){
-                background-color: Green;
+              if(this.props.monthN == this.props.date.getMonth()+1 && this.props.year == this.props.date.getFullYear()){
+                  return <li className = {i == today ? 'today' : ''} key={i}>{item}</li>
+              }else{
+                return <li key={i}>{item}</li>
               }
-              `}
-              </style>
-              <li key={i}>{item}</li>
-              </div>
-            });
+
+                });
 
             const Dday = this.props.day.map((item,i)=>{
               return <li  key={i}>{item}</li>
