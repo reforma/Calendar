@@ -6,6 +6,7 @@
     <script src="https://unpkg.com/react@latest/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://npmcdn.com/style-it@latest/dist/style-it-standalone.js"></script>
     <link rel="Stylesheet" type="text/css" href=".\Stylesheet.css">
   </head>
   <body>
@@ -242,12 +243,13 @@ class DayTable extends React.Component{
  // work out the number of blanks at the strt of the month
 
 render(){
+  let today = this.props.date.getDate() + this.props.blanks
+  console.log(today);
   let style
 
   if(this.props.year == this.props.date.getFullYear() && this.props.date.getMonth()+1 == this.props.monthN) {
     style = {
       backgroundColor:'red',
-    }
   }
 console.log(style)
   let leapYear
@@ -287,8 +289,19 @@ if(ends >= 7){
     let arr = [...blankArr, ...dayArr, ...endArr]
 
             const Dweek = arr.map((item,i)=>{
-              return <li style={style} key={i}>{item}</li>
+              return(
+                <div>
+              <style>
+              {`
+              li:nth-child(1){
+                background-color: Green;
+              }
+              `}
+              </style>
+              <li key={i}>{item}</li>
+              </div>
             });
+
             const Dday = this.props.day.map((item,i)=>{
               return <li  key={i}>{item}</li>
             });
