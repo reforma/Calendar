@@ -244,6 +244,12 @@ class DayTable extends React.Component{
 
 render(){
   let today = this.props.date.getDate() + this.props.blanks -1;
+  let forcastEnd = today + 6
+  let forcastArr = [];
+  for(var i = today; i < forcastEnd; i++){
+    forcastArr.push(i)
+  }
+  console.log(forcastArr)
 
   let leapYear
   if(this.props.year % 4 !=0){
