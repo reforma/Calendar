@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <script src="https://npmcdn.com/style-it@latest/dist/style-it-standalone.js"></script>
+    <link rel="Stylesheet" type="text/css" href=".\Stylesheet.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+    class App extends React.Component{
+      render(){
+        return (
+          <div>
+          <Github username="reforma" />
+          </div>
+        );
+      }
+    }
+
+    const urlForUsername = username =>
+     `https://api.github.com/users/${username}`
+
+    class Github extends React.Component{
+      constructor(props){
+        super(props);
+        this.state ={
+          requestFailed:false
+        }
+      }
+
+      componentDidMount(){
+      fetch(urlForUsername(this.props.username))
+      .then(response => {
+        if(!response.ok){
+          throw Error('Network request Failed')
+        }
+        return response
+      })
+      .then(d => d.json())
+      .then(d => {
+        this.setState({
+        githubData:d
+      })
+    },() =>{
+      this.setState({
+        requestFailed:true
+      })
+    })
+    }
+
+
+  render(){
+    if(this.state.requestFailed)return <p>Failed !</p>
+    if(!this.state.githubData)return <p>loading....</p>
+    return(
+      <div>
+      <h2>{this.state.githubData.name}</h2>
+      </div>
+    )
+  }
+}
+
+    ReactDOM.render(<App />,document.getElementById('root'))
