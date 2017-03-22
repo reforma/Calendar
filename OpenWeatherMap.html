@@ -38,7 +38,7 @@
       }
 
       componentDidMount(){
-      fetch(`http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=75ececc593d1c21eb8c9d25d7ce97bac`)
+      fetch(`http://api.openweathermap.org/data/2.5/forecast?id=2654730&APPID=75ececc593d1c21eb8c9d25d7ce97bac`)
       .then(response => {
         if(!response.ok){
           throw Error('Network request Failed')
