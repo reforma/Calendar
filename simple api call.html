@@ -48,6 +48,15 @@ var obj = {
 let description = obj.weather[0].main
 let tempMax  = obj.main.temp_max -273.15
 let tempMin = obj.main.temp_min -273.15
+let code = obj.weather[0].id
+
+
+let style = {};
+if (code == 300){
+  style = {
+    backgroundColor:'blue'
+  }
+}
 
 class App extends React.Component{
   constructor(props){
@@ -57,7 +66,8 @@ class App extends React.Component{
     return(
       <div>
       <ul>
-      <li key = '1'>1 {description} {tempMax} {tempMin}</li>
+      <li style = {style} key = '1'>1</li>
+      <li style = {style} key = '2'>2</li>
       </ul>
       </div>
     )
