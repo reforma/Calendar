@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <script src="https://npmcdn.com/style-it@latest/dist/style-it-standalone.js"></script>
+    <link rel="Stylesheet" type="text/css" href=".\Stylesheet.css">
+
+    <!--75ececc593d1c21eb8c9d25d7ce97bac-->
+    <!--2654730-->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+    class Day extends React.Component{
+      constructor(props){
+        super(props);
+      }
+      render(){
+        const arr = ['23','24','25','26','27'];
+        let style = {
+          width: '392px',
+          textAlign:'left',
+          paddingLeft:'10px'
+        }
+        const items = arr.map((item,i)=>{
+          return <li style = {style} key={i}>{item}</li>
+        });
+        return(
+          <div>
+          {items}
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Day />,document.getElementById('root'))
