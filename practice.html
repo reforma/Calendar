@@ -210,7 +210,9 @@ console.log(blanks)
        year = {this.state.year}
        date={this.state.date}
        currentMonth = {this.state.currentMonth}/>
+       <Day />
       </div>
+
     );
   }
 };
@@ -310,6 +312,30 @@ if(ends >= 7){
             );
           }
         };
+
+        class Day extends React.Component{
+          constructor(props){
+            super(props);
+          }
+          render(){
+            const arr = ['23','24','25','26','27'];
+            let style = {
+              width: '392px',
+              textAlign:'left',
+              paddingLeft:'10px'
+            }
+            const items = arr.map((item,i)=>{
+              return <li style = {style} key={i}>{item}</li>
+            });
+            return(
+              <div className = 'middle'>
+              <div>
+              {items}
+              </div>
+              </div>
+            )
+          }
+        }
 
 
     ReactDOM.render(<App />,document.getElementById('root'))
