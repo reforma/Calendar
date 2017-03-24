@@ -210,7 +210,8 @@ console.log(blanks)
        year = {this.state.year}
        date={this.state.date}
        currentMonth = {this.state.currentMonth}/>
-       <Day />
+       <Day
+       date = {this.state.date} />
       </div>
 
     );
@@ -318,7 +319,12 @@ if(ends >= 7){
             super(props);
           }
           render(){
-            const arr = ['23','24','25','26','27'];
+            const arr = [];
+            let today = this.props.date.getDate();
+            for(var i = today; i<today+5; i++){
+              arr.push(i);
+            }
+
             let style = {
               width: '392px',
               textAlign:'left',
@@ -328,7 +334,7 @@ if(ends >= 7){
               return <li style = {style} key={i}>{item}</li>
             });
             return(
-              <div className = 'middle'>
+              <div className = 'dayDetail'>
               <div>
               {items}
               </div>
