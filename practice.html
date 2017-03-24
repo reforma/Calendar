@@ -326,18 +326,20 @@ if(ends >= 7){
             }
 
             let style = {
-              width: '392px',
+              width: '700px',
               textAlign:'left',
-              paddingLeft:'10px'
+              marginLeft:'auto',
+              marginRight:'auto',
+              paddingLeft:'20px'
             }
             const items = arr.map((item,i)=>{
-              return <li style = {style} key={i}>{item}</li>
+              return <li style={style} key={i}>{item}</li>
             });
             return(
-              <div className = 'dayDetail'>
               <div>
+              <ul>
               {items}
-              </div>
+              </ul>
               </div>
             )
           }
