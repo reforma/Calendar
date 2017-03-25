@@ -68,3 +68,9 @@ color:black;
 h2{
   margin-bottom: 0px;
 }
+
+.dayDetail li{
+  width:400px;
+  text-align: left;
+  padding-Left:20px;
+}
