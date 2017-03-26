@@ -20,7 +20,7 @@
       render(){
         return (
           <div>
-          <Github city="London,uk" APIkey = '75ececc593d1c21eb8c9d25d7ce97bac' />
+          <APIDay city="London,uk" APIkey = '75ececc593d1c21eb8c9d25d7ce97bac' />
           </div>
         );
       }
@@ -29,7 +29,7 @@
     const urlForUsername = username =>
      `api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${APIkey}`
 
-    class Github extends React.Component{
+    class APIDay extends React.Component{
       constructor(props){
         super(props);
         this.state ={

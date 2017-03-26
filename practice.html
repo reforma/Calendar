@@ -210,7 +210,7 @@ console.log(blanks)
        year = {this.state.year}
        date={this.state.date}
        currentMonth = {this.state.currentMonth}/>
-       <Day
+       <APIDay
        date = {this.state.date} />
       </div>
 
@@ -252,7 +252,7 @@ render(){
   for(var i = today; i < forcastEnd; i++){
     forcastArr.push(i)
   }
-  console.log(forcastArr)
+
 
   let leapYear
   if(this.props.year % 4 !=0){
@@ -314,63 +314,63 @@ if(ends >= 7){
           }
         };
 
-class Day extends React.Component{
-  constructor(props){
-    super(props);
-  }
-  render(){
-    var obj = {"cod":"200",
-    "message":0.0036,
-    "cnt":40,
-    "list":
-    [{"dt":1485799200,
-    "main":{"temp":261.45,
-    "temp_min":259.086,
-    "temp_max":261.45,
-    "pressure":1023.48,
-    "sea_level":1045.39,
-    "grnd_level":1023.48,
-    "humidity":79,
-    "temp_kf":2.37},
-    "weather":
-    [{"id":800,
-    "main":"Clear",
-    "description":"clear sky",
-    "icon":"02n"}],
-    "clouds":{"all":8},
-    "wind":{"speed":4.77,
-    "deg":232.505},
-    "snow":{},
-    "sys":{"pod":"n"},
-    "dt_txt":"2017-01-30 18:00:00"}]}
 
-    const today = this.props.date.getDate()
+        class APIDay extends React.Component{
+          constructor(props){
+            super(props);
+            this.state ={
+              requestFailed:false
+            }
+          }
 
-    const backgroundColor = 'red'
+          componentDidMount(){
+          fetch(`http://api.openweathermap.org/data/2.5/forecast?id=2654730&APPID=75ececc593d1c21eb8c9d25d7ce97bac`)
+          .then(response => {
+            if(!response.ok){
+              throw Error('Network request Failed')
+            }
+            return response
+          })
+          .then(d => d.json())
+          .then(d => {
+            this.setState({
+            weatherData:d
+          })
+        },() =>{
+          this.setState({
+            requestFailed:true
+          })
+        })
+      }
 
-    const style1 = {
-      backgroundColor:backgroundColor,
+
+      render(){
+        if(this.state.requestFailed)return <p>Failed !</p>
+        if(!this.state.weatherData)return <p>loading....</p>
+
+        const today = this.props.date.getDate();
+        const Style = {
+          width:'300px',
+          margin:'0px'
+        }
+        const weatherDay1 = this.state.weatherData.list[0].weather[0].description;
+        const tempData1 = this.state.weatherData.list[0].main.temp - 272.15;
+        const tempDay1 = Math.round(tempData1);
+
+        const day1 = <div><li style={Style}>{today}</li><li style={Style}>{weatherDay1}</li><li style = {Style}>{tempDay1}</li></div>
+
+        console.log(weatherDay1)
+
+
+
+        return(
+          <div>
+          <ul>
+          {day1}
+          </ul>
+          </div>
+        )
+      }
     }
 
-    const Day1 = <li style = {style1}>{today}<span></span>{obj.list[0].weather[0].description}<span></span>{obj.list[0].main.temp-273.15}</li>
-    const Day2 = <li style = {style1}>{today+1}</li>
-    const Day3 = <li style = {style1}>{today+2}</li>
-    const Day4 = <li style = {style1}>{today+3}</li>
-    const Day5 = <li style = {style1}>{today+4}</li>
-
-    return(
-      <div>
-      <ul className = 'dayDetail'>
-      {Day1}
-      {Day2}
-      {Day3}
-      {Day4}
-      {Day5}
-      </ul>
-      </div>
-    )
-  }
-}
-
-
-    ReactDOM.render(<App />,document.getElementById('root'))
+ReactDOM.render(<App />,document.getElementById('root'))
