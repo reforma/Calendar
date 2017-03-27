@@ -355,16 +355,16 @@ if(ends >= 7){
         }
         const weatherDay1 = this.state.weatherData.list[0].weather[0].description;
         const tempData1 = this.state.weatherData.list[0].main.temp - 272.15;
-        const tempDay1 = Math.round(tempData1);
+        const temp1 = Math.round(tempData1)
 
-        const day1 = <div><li style={Style}>{today}</li><li style={Style}>{weatherDay1}</li><li style = {Style}>{tempDay1}</li></div>
+        const day1 = <div><li style={Style}>{today}</li><li style={Style}>{weatherDay1}</li><li style = {Style}>{temp1}</li></div>
 
         console.log(weatherDay1)
 
 
 
         return(
-          <div>
+          <div className = 'dayDetail'>
           <ul>
           {day1}
           </ul>
