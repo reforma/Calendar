@@ -292,7 +292,7 @@ if(ends >= 7){
 
             const Dweek = arr.map((item,i)=>{
               if(this.props.monthN == this.props.date.getMonth()+1 && this.props.year == this.props.date.getFullYear()){
-                  return <li className = {i == today ? 'today' : ''} key={i}>{item}</li>
+                  return <li className = {i == today ? 'today' : 'NotToday'} key={i}>{item}</li>
               }else{
                 return <li key={i}>{item}</li>
               }
@@ -350,7 +350,7 @@ if(ends >= 7){
 
         const today = this.props.date.getDate();
         const Style = {
-          width:'200px',
+          width:'125px',
           margin:'0px'
         }
         const weatherDay1 = this.state.weatherData.list[0].weather[0].description;
