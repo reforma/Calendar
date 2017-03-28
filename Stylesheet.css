@@ -31,7 +31,7 @@ margin-bottom: 30px;
   flex-wrap: wrap;
   }
 
- li{
+.Middle li{
   list-style: none;
   width:55px;
   height:50px;
@@ -78,11 +78,6 @@ color:black;
   flex-wrap: nowrap;
   }
 
-
-
-  width: 130px;
-}
-
 h2{
   margin-bottom: 0px;
 }
@@ -91,4 +86,10 @@ h2{
   width:400px;
   text-align: left;
   padding-Left:20px;
+  list-style: none;
+  flex-wrap: wrap;
+  background-color: #8acaea;
+  font-weight: bold;
+  color:#eee;
+  flex-shrink: 0;
 }

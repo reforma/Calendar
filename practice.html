@@ -26,7 +26,7 @@ class App extends React.Component{
           }else{
             blanks = date.getDay() - num -(-7);
           }
-console.log(blanks)
+
     let lookupTable ={
       1:function(){
         return "January";
@@ -350,24 +350,21 @@ if(ends >= 7){
 
         const today = this.props.date.getDate();
         const Style = {
-          width:'300px',
+          width:'200px',
           margin:'0px'
         }
         const weatherDay1 = this.state.weatherData.list[0].weather[0].description;
         const tempData1 = this.state.weatherData.list[0].main.temp - 272.15;
         const temp1 = Math.round(tempData1)
 
-        const day1 = <div><li style={Style}>{today}</li><li style={Style}>{weatherDay1}</li><li style = {Style}>{temp1}</li></div>
-
-        console.log(weatherDay1)
-
+        const day1 = <ul><li style={Style}>{today}</li><li style={Style}>{weatherDay1}</li><li style = {Style}>{temp1} C</li></ul>
 
 
         return(
           <div className = 'dayDetail'>
-          <ul>
+
           {day1}
-          </ul>
+
           </div>
         )
       }
