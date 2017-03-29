@@ -7,53 +7,102 @@
     <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <script src="https://npmcdn.com/style-it@latest/dist/style-it-standalone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/4.0.6/react-redux.js"></script>
     <link rel="Stylesheet" type="text/css" href=".\Stylesheet.css">
   </head>
   <body>
     <div id="root"></div>
     <script type="text/babel">
+    // Redux:
+    const ADD = 'ADD';
 
-    class Messages extends React.Component{
-    constructor(props){
-    super(props);
-    this.state = {
-    input:'',
-    messages:[]
-    }
-    }
+    const addMessage = (message) => {
+    	return {
+        type: ADD,
+        message: message
+      }
+    };
 
-    handleChange=(e)=>{
-    this.setState({
-    input:e.target.value
-    });
-    }
+    const messageReducer = (state = [], action) => {
+      switch (action.type) {
+        case ADD:
+          return state.concat(action.message);
+        default:
+          return state;
+      }
+    };
 
-    handleSubmit=()=>{
-      const currentMessage = this.state.input;
-      this.setState({
-        input: '',
-        messages: this.state.messages.concat(currentMessage)
-      });
-    }
+    const store = Redux.createStore(messageReducer);
+    console.log(store.getState())
 
-    render(){
-    const items = this.state.messages.map((item,i)=>{
-    return <li key={i}>{item}</li>});
+    // React:
+    const Provider = ReactRedux.Provider;
+    const connect = ReactRedux.connect;
 
-    return(
-    <div>
-    <h2> enter your message here:</h2>
-    <input
-    value = {this.state.input}
-    onChange = {this.handleChange}
-    />
-    <button onClick={this.handleSubmit}>Submit</button>
-    <ul>
-    {items}
-    </ul>
-    </div>
-    )
-    }
-    }
+    // Change code below this line
+    class Presentational extends React.Component {
+    	constructor(props) {
+    		super(props);
+        this.state = {
+          input: ''
+        }
+    	}
+      handleChange = (event) => {
+        this.setState({
+          input: event.target.value
+        });
+      }
+    	submitMessage = () => {
+        this.props.submitNewMessage(this.state.input);
+        this.setState({
+          input: ''
+        });
+        console.log(store.getState())
+      }
+      render() {
+        return (
+        	<div>
+            <h2>Type in a new Message:</h2>
+            <input
+              value={this.state.input}
+              onChange={this.handleChange}/><br/>
+        		<button onClick={this.submitMessage}>Submit</button>
+        		<ul>
+    		    	{this.props.messages.map( (message, idx) => {
+    		    			return (
+    		    			 	<li key={idx}>{message}</li>
+    		    			)
+    		    		})
+    	    		}
+    	    	</ul>
+        	</div>
+        );
+      }
+    };
+    // Change code above this line
 
-    ReactDOM.render(<Messages />,document.getElementById('root'))
+    const mapStateToProps = (state) => {
+      return {messages: state}
+    };
+
+    const mapDispatchToProps = (dispatch) => {
+      return {
+        submitNewMessage: (message) => {
+          dispatch(addMessage(message))
+        }
+      }
+    };
+
+    const Container = connect(mapStateToProps, mapDispatchToProps)(Presentational);
+
+    class AppWrapper extends React.Component {
+    	render() {
+    		return (
+    			<Provider store={store}>
+    				<Container/>
+    			</Provider>
+    		);
+    	}
+    };
+    ReactDOM.render(<AppWrapper />,document.getElementById('root'))
