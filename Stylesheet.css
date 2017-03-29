@@ -31,6 +31,10 @@ margin-bottom: 30px;
   flex-wrap: wrap;
   }
 
+  .today{
+  color:black;
+  }
+
 .Middle li{
   list-style: none;
   width:55px;
@@ -41,7 +45,7 @@ margin-bottom: 30px;
   flex-basis: 50px;
   line-height: 50px;
   font-weight: bold;
-  color:#eee;
+
   flex-shrink: 0;
 }
 
@@ -54,8 +58,8 @@ li:empty{
   background-color: #eee;
 }
 
-.today{
-color:black;
+.NotToday{
+  color:#eee;
 }
 
 .inline > h2{
@@ -63,11 +67,11 @@ color:black;
   padding-left:5px;
   padding-right: 5px;
 }
+
 .dayDetail{
-  margin-left: auto;
-  margin-right: auto;
-  width:80%;
-  margin-top:50px;
+  margin-left:auto;
+  margin-right:auto;
+  width:50%;
 }
 
 .dayDetail ul{
@@ -76,6 +80,7 @@ color:black;
   margin:auto;
   justify-content: flex-start;
   flex-wrap: nowrap;
+  padding-top: 60px;
   }
 
 h2{
@@ -83,13 +88,17 @@ h2{
 }
 
 .dayDetail li{
-  width:400px;
+  width:175px;
+  height: 50px;
   text-align: left;
   padding-Left:20px;
   list-style: none;
   flex-wrap: wrap;
-  background-color: #8acaea;
+  background-color: #eee;
   font-weight: bold;
-  color:#eee;
+  color:black;
   flex-shrink: 0;
+  vertical-align: middle;
+  line-height: 50px;
+
 }
