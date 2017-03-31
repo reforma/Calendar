@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://npmcdn.com/style-it@latest/dist/style-it-standalone.js"></script>
+
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+    class Component extends React.Component{
+      constructor(props){
+        super(props);
+
+        let days = [
+          {1:null},
+          {2:null},
+          {3:'rain'},
+          {4:'Clear'},
+          {5:null},
+          {6:null},
+        this.state = {
+          array:['1','2','3','4','5','6']
+          today: 4,
+        }
+      }
+
+      render(){
+        const style = {
+          1:
+        }
+        if()
+        const items = this.state.array.map((item,i)=>{
+          return <li key ={i} style = {style} value={i}>{item}</li>
+        });
+        return(
+          <div>
+          <ul>
+          {items}
+          </ul>
+          </div>
+        );
+      }
+    };
+
+    ReactDOM.render(<Component />,document.getElementById('root'))
