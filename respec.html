@@ -14,33 +14,89 @@
     <div id="root"></div>
     <script type="text/babel">
 
+    let obj = [
+      {date:'',weather:null,Temp:null},
+      {date:'',weather:null,Temp:null},
+      {date:'1',weather:null,Temp:null},
+      {date:'2',weather:null,Temp:null},
+      {date:'3',weather:null,Temp:null},
+      {date:'4',weather:null,Temp:null},
+      {date:'5',weather:null,Temp:null},
+      {date:'6',weather:null,Temp:null},
+      {date:'7',weather:null,Temp:null},
+      {date:'8',weather:null,Temp:null},
+      {date:'9',weather:null,Temp:null},
+      {date:'10',weather:null,Temp:null},
+      {date:'11',weather:null,Temp:null},
+      {date:'12',weather:null,Temp:null},
+      {date:'13',weather:null,Temp:null},
+      {date:'14',weather:null,Temp:null},
+    ];
 
-class Row extends React.Component {
-render(){
-const row1 = ['','','1','2','3','4','5'];
-const row1Items = row1.map((item,i)=>{
-return <td key ={i}>{item}</td>
-})
-return (
-<tr>
-{row1Items}
-</tr>
-)
-}
-}
+    let number = [];
+   class App extends React.Component{
+      constructor(props){
+        super(props);
+        this.state = {
+          obj: obj
+        }
+      }
 
-class App extends React.Component{
-  render(){
+      render(){
+        return (
+          <div>
+          <table>
+
+          <Row obj = {this.state.obj}/>
+
+          </table>
+          </div>
+        );
+      }
+    };
+
+    class Row extends React.Component {
+    render(){
+    const row1 = [];
+    const row2 = [];
+    const row3 = [];
+    const row4 = [];
+    const row5 = [];
+    for(var i = 0; i< 7;i++){
+      row1.push(<Cell
+          day={this.props.obj[i].date}
+          key={i}
+          />);
+      }
+      for(var i = 7; i< 14;i++){
+        row2.push(<Cell
+            day={this.props.obj[i].date}
+            key={i}
+            />);
+        }
     return (
-      <div>
-      <table>
       <tbody>
-      <Row />
-      </tbody>
-      </table>
-      </div>
-    );
+          <tr>
+            {row1}
+          </tr>
+          <tr>
+          {row2}
+          </tr>
+        </tbody>
+          );
+        }
+      };
+
+
+class Cell extends React.Component{
+  render(){
+    let day = this.props.day
+    return <td>{day}</td>
   }
-};
+}
+
+
+
+
 
 ReactDOM.render(<App />,document.getElementById('root'))
