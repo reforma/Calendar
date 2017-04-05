@@ -225,32 +225,104 @@
            monthUp={this.monthUp}
            monthDown={this.monthDown}
             />
-          <table>
-          <Row obj = {this.state.obj}/>
-          </table>
+
           <APIDay blanks={this.state.blanks} />
           </div>
         );
       }
     };
 
+    class APIDay extends React.Component{
+      constructor(props){
+        super(props);
+        this.state ={
+          requestFailed:false,
+          obj:{}
+        }
+      }
+
+      componentDidMount(){
+      fetch(`http://api.openweathermap.org/data/2.5/forecast?id=2654730&APPID=75ececc593d1c21eb8c9d25d7ce97bac`)
+      .then(response => {
+          if(!response.ok){
+            throw Error('Network request Failed')
+          }
+          return response
+        })
+      .then(d => d.json())
+      .then(d => {
+        this.setState({
+        weatherData:d
+      })
+    },
+    () =>{
+      this.setState({
+        requestFailed:true,
+      })
+    })
+  }
+
+
+    render(){
+    if(this.state.requestFailed)return <p>Failed !</p>
+    if(!this.state.weatherData)return <p>loading....</p>
+
+
+
+
+    return(
+      <div className = 'dayDetail'>
+      <table>
+      <Row obj = {this.state.obj}
+      weatherData ={this.state.weatherData}
+      blanks = {this.props.blanks}/>
+      </table>
+      </div>
+        );
+      }
+    };
+
+
     class Row extends React.Component {
     render(){
+      let obj = {};
+      let daysBefore = this.props.blanks
+      let Day = [];
+      let Month = [];
+      let Weather =[];
+      let temp = [];
+      for(var i =0; i < this.props.weatherData.list.length; i++ ){
+
+       if(this.props.weatherData.list[i].dt_txt.substring(11,13)==12){
+        Weather.push(this.props.weatherData.list[i].weather[0].id)
+        Day.push(this.props.weatherData.list[i].dt_txt.substring(8,10))
+          Month.push(this.props.weatherData.list[i].dt_txt.substring(5,7))
+          temp.push((this.props.weatherData.list[i].main.temp-273.15).toFixed(1))
+          }
+        }
+
+      for(var x = 0; x < Day.length; x++)
+        obj[Day[x]] = [Month[x], Weather[x],temp[x]];
+
+        for(let i = 0; i<this.props.blanks;i++){
+          obj[0.1*i]=[null,null,null];
+        }
     const row1 = [];
     const row2 = [];
     const row3 = [];
     const row4 = [];
     const row5 = [];
-
+console.log(obj)
+console.log(this.props.blanks)
     for(var i = 0; i< 7;i++){
       row1.push(<Cell
-          day={this.props.obj[i].date}
+          day={this.props.obj[i]}
           key={i}
           />);
       }
       for(var i = 7; i< 14;i++){
         row2.push(<Cell
-            day={this.props.obj[i].date}
+            day={this.props.obj[i]}
             key={i}
             />);
         }
@@ -275,77 +347,6 @@ class Cell extends React.Component{
   }
 }
 
-class APIDay extends React.Component{
-  constructor(props){
-    super(props);
-    this.state ={
-      requestFailed:false
-    }
-  }
-
-  componentDidMount(){
-  fetch(`http://api.openweathermap.org/data/2.5/forecast?id=2654730&APPID=75ececc593d1c21eb8c9d25d7ce97bac`)
-  .then(response => {
-    if(!response.ok){
-      throw Error('Network request Failed')
-    }
-    return response
-  })
-  .then(d => d.json())
-  .then(d => {
-    this.setState({
-    weatherData:d
-  })
-},() =>{
-  this.setState({
-    requestFailed:true
-  })
-})
-
-}
-
-
-render(){
-if(this.state.requestFailed)return <p>Failed !</p>
-if(!this.state.weatherData)return <p>loading....</p>
-
-let obj = {};
-let daysBefore = this.props.blanks
-let Day = [];
-
-
-let Month = [];
-let Weather =[];
-let temp = [];
-for(var i =0; i < this.state.weatherData.list.length; i++ ){
-
- if(this.state.weatherData.list[i].dt_txt.substring(11,13)==12){
-  Weather.push(this.state.weatherData.list[i].weather[0].id)
-  Day.push(this.state.weatherData.list[i].dt_txt.substring(8,10))
-    Month.push(this.state.weatherData.list[i].dt_txt.substring(5,7))
-    temp.push((this.state.weatherData.list[i].main.temp-273.15).toFixed(1))
-
-}
-}
-
-for(var x = 0; x < Day.length; x++)
-  obj[Day[x]] = [Month[x], Weather[x],temp[x]];
-
-  for(let i = 0; i<this.props.blanks;i++){
-    obj[0.1*i]=[null,null,null];
-  }
-
-console.log(obj);
-
-return(
-  <div className = 'dayDetail'>
-
-
-
-  </div>
-)
-}
-}
 
     class MonthSelector extends React.Component{
       constructor(props){
