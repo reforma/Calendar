@@ -55,10 +55,10 @@
         requestFailed:true
       })
     })
-  }
 
 
-  render(){
+}
+  render(){console.log(this.state.githubData)
     if(this.state.requestFailed)return <p>Failed !</p>
     if(!this.state.githubData)return <p>loading....</p>
     return(

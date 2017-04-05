@@ -14,42 +14,221 @@
     <div id="root"></div>
     <script type="text/babel">
 
-    let obj = [
-      {date:'',weather:null,Temp:null},
-      {date:'',weather:null,Temp:null},
-      {date:'1',weather:null,Temp:null},
-      {date:'2',weather:null,Temp:null},
-      {date:'3',weather:null,Temp:null},
-      {date:'4',weather:null,Temp:null},
-      {date:'5',weather:null,Temp:null},
-      {date:'6',weather:null,Temp:null},
-      {date:'7',weather:null,Temp:null},
-      {date:'8',weather:null,Temp:null},
-      {date:'9',weather:null,Temp:null},
-      {date:'10',weather:null,Temp:null},
-      {date:'11',weather:null,Temp:null},
-      {date:'12',weather:null,Temp:null},
-      {date:'13',weather:null,Temp:null},
-      {date:'14',weather:null,Temp:null},
-    ];
 
-    let number = [];
-   class App extends React.Component{
+
+    class App extends React.Component{
       constructor(props){
         super(props);
-        this.state = {
-          obj: obj
+
+            let obj = [
+              {date:'',weather:null,Temp:null},
+              {date:'',weather:null,Temp:null},
+              {date:'1',weather:null,Temp:null},
+              {date:'2',weather:null,Temp:null},
+              {date:'3',weather:null,Temp:null},
+              {date:'4',weather:null,Temp:null},
+              {date:'5',weather:null,Temp:null},
+              {date:'6',weather:null,Temp:null},
+              {date:'7',weather:null,Temp:null},
+              {date:'8',weather:null,Temp:null},
+              {date:'9',weather:null,Temp:null},
+              {date:'10',weather:null,Temp:null},
+              {date:'11',weather:null,Temp:null},
+              {date:'12',weather:null,Temp:null},
+              {date:'13',weather:null,Temp:null},
+              {date:'14',weather:null,Temp:null},
+            ];
+
+            let number = [];
+          let date = new Date();
+          let currentMonth = date.getMonth()+1;
+          let currentYear =date.getFullYear();
+          let num =date.getDate() % 7;
+          let blanks;
+            if(date.getDay()-num >= 0){
+                blanks = date.getDay() - num;
+              }else{
+                blanks = date.getDay() - num -(-7);
+              }
+
+        let lookupTable ={
+          1:function(){
+            return "January";
+          },
+          2:function(){
+            return "February";
+          },
+          3:function(){
+            return "March";
+          },
+          4:function(){
+            return "April";
+          },
+          5:function(){
+            return "May";
+          },
+          6:function(){
+            return "June";
+          },
+          7:function(){
+            return "July";
+          },
+          8:function(){
+            return "August";
+          },
+          9:function(){
+            return "September";
+          },
+          10:function(){
+            return "October";
+          },
+          11:function(){
+            return "November";
+          },
+          12:function(){
+            return "December";
+          }
         }
-      }
+
+        let arr =[];
+        let luTable = {
+          1:function(){
+            return 31;
+          },
+          2:function(){
+            return 28;
+          },
+          3:function(){
+            return 31;
+          },
+          4:function(){
+            return 30;
+          },
+          5:function(){
+            return 31
+          },
+          6:function(){
+            return 30
+          },
+          7:function(){
+            return 31
+          },
+          8:function(){
+            return 31
+          },
+          9:function(){
+            return 30
+          },
+          10:function(){
+            return 31
+          },
+          11:function(){
+            return 30
+          },
+          12:function(){
+            return 31
+          }
+        }
+
+        this.state ={
+          date:date,
+          monthN:currentMonth,
+          year:currentYear,
+          Mname:lookupTable[currentMonth](),
+          lookupTable:lookupTable,
+          day:['M','T','W','T','F','S','S'],
+          blanks:blanks,
+          luTable:luTable,
+          obj: obj
+            }
+          }
+            monthDown=()=>{
+
+              let leapYear
+                if(this.state.year % 4 !=0){
+                  leapYear = 0;
+                }else if (this.state.year % 100 !=0) {
+                  leapYear = 1;}
+                else if (this.state.year % 400 !=0) {
+                  leapYear = 0;}
+                else {
+                  leapYear = 1;
+                }
+
+            let  endBlanks = 7 -this.state.blanks
+              let CmonthN
+                if (this.state.monthN == 1){
+                  CmonthN = 12
+                }else{
+                  CmonthN = this.state.monthN -1 }
+
+              let blanks
+                if((42 - this.state.luTable[CmonthN]() - endBlanks)>6){
+                  blanks =  35 - this.state.luTable[CmonthN]() - endBlanks
+                }else{
+                  blanks = 42 - this.state.luTable[CmonthN]() - endBlanks
+                }
+
+              if (leapYear == 1 && CmonthN == 2 ){
+                blanks = blanks -1
+              }else {
+                blanks = blanks
+              }
+
+            this.state.monthN == 1 ? this.setState({
+              monthN:12,
+              year:this.state.year - 1,
+              blanks: blanks
+              }
+                ):this.setState(
+                  {monthN:this.state.monthN - 1,
+                    blanks: blanks
+                  }
+                )
+              }
+
+        monthUp=()=>{
+          let leapYear
+            if(this.state.year % 4 !=0){
+              leapYear = 0;
+            }else if (this.state.year % 100 !=0) {
+              leapYear = 1;}
+            else if (this.state.year % 400 !=0) {
+              leapYear = 0;}
+            else {
+                leapYear = 1;
+              }
+
+          let newBlank = 0;
+            if (leapYear == 1 && this.state.monthN == 2){
+              newBlank = (this.state.blanks + this.state.luTable[this.state.monthN]())%7 +1
+            } else {
+              newBlank = (this.state.blanks + this.state.luTable[this.state.monthN]())%7;
+            }
+
+          this.state.monthN == 12 ? this.setState(
+            {monthN:1,
+             year:this.state.year +1,
+             blanks:newBlank})
+          :this.setState({monthN:this.state.monthN + 1,
+          blanks:newBlank})
+        }
 
       render(){
         return (
           <div>
+          <MonthSelector
+           monthN ={this.state.monthN}
+           year = {this.state.year}
+           Mname = {this.state.Mname}
+           lookupTable = {this.state.lookupTable}
+           monthUp={this.monthUp}
+           monthDown={this.monthDown}
+            />
           <table>
-
           <Row obj = {this.state.obj}/>
-
           </table>
+          <APIDay blanks={this.state.blanks} />
           </div>
         );
       }
@@ -62,6 +241,7 @@
     const row3 = [];
     const row4 = [];
     const row5 = [];
+
     for(var i = 0; i< 7;i++){
       row1.push(<Cell
           day={this.props.obj[i].date}
@@ -80,7 +260,7 @@
             {row1}
           </tr>
           <tr>
-          {row2}
+            {row2}
           </tr>
         </tbody>
           );
@@ -95,7 +275,98 @@ class Cell extends React.Component{
   }
 }
 
+class APIDay extends React.Component{
+  constructor(props){
+    super(props);
+    this.state ={
+      requestFailed:false
+    }
+  }
 
+  componentDidMount(){
+  fetch(`http://api.openweathermap.org/data/2.5/forecast?id=2654730&APPID=75ececc593d1c21eb8c9d25d7ce97bac`)
+  .then(response => {
+    if(!response.ok){
+      throw Error('Network request Failed')
+    }
+    return response
+  })
+  .then(d => d.json())
+  .then(d => {
+    this.setState({
+    weatherData:d
+  })
+},() =>{
+  this.setState({
+    requestFailed:true
+  })
+})
+
+}
+
+
+render(){
+if(this.state.requestFailed)return <p>Failed !</p>
+if(!this.state.weatherData)return <p>loading....</p>
+
+let obj = {};
+let daysBefore = this.props.blanks
+let Day = [];
+
+
+let Month = [];
+let Weather =[];
+let temp = [];
+for(var i =0; i < this.state.weatherData.list.length; i++ ){
+
+ if(this.state.weatherData.list[i].dt_txt.substring(11,13)==12){
+  Weather.push(this.state.weatherData.list[i].weather[0].id)
+  Day.push(this.state.weatherData.list[i].dt_txt.substring(8,10))
+    Month.push(this.state.weatherData.list[i].dt_txt.substring(5,7))
+    temp.push((this.state.weatherData.list[i].main.temp-273.15).toFixed(1))
+
+}
+}
+
+for(var x = 0; x < Day.length; x++)
+  obj[Day[x]] = [Month[x], Weather[x],temp[x]];
+
+  for(let i = 0; i<this.props.blanks;i++){
+    obj[0.1*i]=[null,null,null];
+  }
+
+console.log(obj);
+
+return(
+  <div className = 'dayDetail'>
+
+
+
+  </div>
+)
+}
+}
+
+    class MonthSelector extends React.Component{
+      constructor(props){
+        super(props);
+      }
+      render(){
+        const MonthName = this.props.lookupTable[this.props.monthN]();
+        return(
+          <div>
+            <div className="container">
+              <h2>{this.props.year}</h2>
+                <div className="inline">
+                  <button onClick={this.props.monthDown}>Prev</button>
+                  <h2>{MonthName}</h2>
+                  <button onClick={this.props.monthUp}>Next</button>
+                  </div>
+                  </div>
+                  </div>
+                );
+              }
+            };
 
 
 
