@@ -297,17 +297,13 @@
           Day.push(this.props.weatherData.list[i].dt_txt.substring(8,10))
             Month.push(this.props.weatherData.list[i].dt_txt.substring(5,7))
             temp.push((this.props.weatherData.list[i].main.temp-273.15).toFixed(1))
+
             }
           }
 
         for(var x = 0; x < Day.length; x++)
           obj[Day[x]] = [Day[x], Month[x], Weather[x],temp[x]];
 
-          for(let i = 0; i<this.props.blanks;i++){
-            obj[0.1*i]=['0',null,null,null];
-          }
-
-console.log(obj[0])
         this.state ={
           Data:obj
         }
@@ -319,27 +315,20 @@ console.log(obj[0])
       const row4 = [];
       const row5 = [];
 
-    for(var i = 0; i< 7;i++){
-      console.log(this.state.Data[1])
-      row1.push(<Cell
-          day={this.state.Data}
+    for(var i = 15; i< 20 ;i++){
+      console.log(this.state.Data[i])
+          row1.push(<Cell
+          day={this.state.Data[i][0]}
           key={i}
           obj={this.state.Data}
+          temp={this.state.Data[i][3]}
           />);
       }
-      for(var i = 7; i< 14;i++){
-        row2.push(<Cell
-            day={this.state.Data}
-            key={i}
-            />);
-        }
+
     return (
       <tbody>
           <tr>
             {row1}
-          </tr>
-          <tr>
-            {row2}
           </tr>
         </tbody>
           );
@@ -350,7 +339,17 @@ console.log(obj[0])
 class Cell extends React.Component{
   render(){
     let day = this.props.day
-    return <td>{day}</td>
+    let style = {};
+
+    if (this.props.temp <= 9.9){
+      style = {backgroundColor:'Blue'}
+    }
+    else if (this.props.temp >15){
+     style = {backgroundColor:'Red'}
+    }
+    else style = {backgroundColor:'Orange'}
+console.log(this.props.temp)
+    return <td style ={style}>{day}</td>
   }
 }
 

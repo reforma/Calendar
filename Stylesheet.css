@@ -100,5 +100,9 @@ h2{
   flex-shrink: 0;
   vertical-align: middle;
   line-height: 50px;
+}
 
+td{
+  width:50px;
+  weight:50px;
 }
