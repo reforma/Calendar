@@ -19,26 +19,6 @@
     class App extends React.Component{
       constructor(props){
         super(props);
-
-            let obj = [
-              {date:'',weather:null,Temp:null},
-              {date:'',weather:null,Temp:null},
-              {date:'1',weather:null,Temp:null},
-              {date:'2',weather:null,Temp:null},
-              {date:'3',weather:null,Temp:null},
-              {date:'4',weather:null,Temp:null},
-              {date:'5',weather:null,Temp:null},
-              {date:'6',weather:null,Temp:null},
-              {date:'7',weather:null,Temp:null},
-              {date:'8',weather:null,Temp:null},
-              {date:'9',weather:null,Temp:null},
-              {date:'10',weather:null,Temp:null},
-              {date:'11',weather:null,Temp:null},
-              {date:'12',weather:null,Temp:null},
-              {date:'13',weather:null,Temp:null},
-              {date:'14',weather:null,Temp:null},
-            ];
-
           let number = [];
           let date = new Date();
           let currentMonth = date.getMonth()+1;
@@ -139,7 +119,7 @@
           day:['M','T','W','T','F','S','S'],
           blanks:blanks,
           luTable:luTable,
-          obj: obj
+
             }
           }
             monthDown=()=>{
@@ -269,12 +249,12 @@
   if(!this.state.weatherData)return <p>loading....</p>
     return(
       <div className = 'dayDetail'>
-      <table>
+
       <Row weatherData ={this.state.weatherData}
       blanks = {this.props.blanks}
       luTable = {this.props.luTable}
       monthN ={this.props.monthN}/>
-      </table>
+
       </div>
         );
       }
@@ -285,9 +265,12 @@
       constructor(props){
         super(props);
         let days = this.props.luTable[this.props.monthN]();
-        console.log(days)
+
         let obj = {};
-        let Day = ['1','2','3','4','5','6','7','8','9','10',11,12,13,14,15,16,17,18,19];
+        let Day = [];
+        for(var i = 1; i<=days;i++){
+          Day.push(i);
+        }
         let Month = [];
         let Weather =[];
         let temp = [];
@@ -296,9 +279,9 @@
          if(this.props.weatherData.list[i].dt_txt.substring(11,13)==12){
           Weather.push(this.props.weatherData.list[i].weather[0].id)
           Day.push(this.props.weatherData.list[i].dt_txt.substring(8,10))
-            Month.push(this.props.weatherData.list[i].dt_txt.substring(5,7))
-            temp.push((this.props.weatherData.list[i].main.temp-273.15).toFixed(1))
-console.log(Day)
+          Month.push(this.props.weatherData.list[i].dt_txt.substring(5,7))
+          temp.push((this.props.weatherData.list[i].main.temp-273.15).toFixed(1))
+
             }
           }
 
@@ -306,30 +289,96 @@ console.log(Day)
           obj[Day[x]] = [Day[x], Month[x], Weather[x],temp[x]];
 
         this.state ={
-          Data:obj
+          Data:obj,
+          days:days
         }
       }
     render(){
+      const thead =[];
+      const dayName = ['M','T','W','T','F','S','S'];
       const row1 = [];
       const row2 = [];
       const row3 = [];
       const row4 = [];
       const row5 = [];
 
-    for(var i = 1; i< 24 ;i++){
+      for(var i = 0; i < dayName.length ;i++){
+        thead.push(<Cell
+        day={dayName[i]}
+        key={i}/>
+
+    );
+      }
+
+    for(var i = 1; i< 8 ;i++){
           row1.push(<Cell
           day={this.state.Data[i][0]}
           key={i}
           temp={this.state.Data[i][3]}
           />);
       }
+      for(var i = 8; i< 15 ;i++){
+            row2.push(<Cell
+            day={this.state.Data[i][0]}
+            key={i}
+            temp={this.state.Data[i][3]}
+            />);
+        }
+
+        for(var i = 15; i< 22 ;i++){
+              row3.push(<Cell
+              day={this.state.Data[i][0]}
+              key={i}
+              temp={this.state.Data[i][3]}
+              />);
+          }
+
+          for(var i = 22; i< 29 ;i++){
+
+                row4.push(<Cell
+                day={this.state.Data[i][0]}
+                key={i}
+                temp={this.state.Data[i][3]}
+                />);
+            }
+
+            for(var i = 29 ; i<=this.state.days ;i++){
+
+              row5.push(<Cell
+              day={this.state.Data[i][0]}
+              key={i}
+              temp={this.state.Data[i][3]}
+              />);
+            }
+
+
 
     return (
-      <tbody>
+      <table>
+        <thead>
+        <tr>
+          {thead}
+          </tr>
+        </thead>
+        <tbody>
           <tr>
             {row1}
           </tr>
+          <tr>
+            {row2}
+          </tr>
+          <tr>
+            {row3}
+          </tr>
+          <tr>
+            {row4}
+          </tr>
+          <tr>
+            {row5}
+          </tr>
+
         </tbody>
+        </table>
           );
         }
       };
